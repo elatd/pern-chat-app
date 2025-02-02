@@ -20,3 +20,6 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(3000, () => {
   console.log("Example app listening on port 3000!");
 });
+
+// @TODO :Add web socket.io
+// @TODO : Setup server for deployment

@@ -32,11 +32,13 @@ export const protectRoute = async (
 
     if (!id) {
       res.status(401).json({ error: "Unauthorized - No token found" });
+      return;
     }
     const decoded = jwt.verify(id, process.env.JWT_SECRET!) as DecodedToken;
 
     if (!decoded) {
       res.status(401).json({ error: "Unauthorized - Invalid token" });
+      return;
     }
 
     const user = await prisma.user.findUnique({
@@ -51,6 +53,7 @@ export const protectRoute = async (
 
     if (!user) {
       res.status(404).json({ error: "User not found" });
+      return;
     }
 
     if (user) {
@@ -61,5 +64,6 @@ export const protectRoute = async (
   } catch (error) {
     console.log("Error in logout controller", error);
     res.status(500).json({ error: "Internal Server Error" });
+    return;
   }
 };
