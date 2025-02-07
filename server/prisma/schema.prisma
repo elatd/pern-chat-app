@@ -56,5 +56,4 @@ model Message {
 enum Gender {
   male
   female
-  others
 }
