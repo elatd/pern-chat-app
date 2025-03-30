@@ -16,7 +16,6 @@ const Login = () => {
   const handleLogin = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     login(form);
-    console.log(form);
   };
 
   return (

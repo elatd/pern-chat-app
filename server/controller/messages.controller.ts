@@ -107,8 +107,7 @@ export const getUsersForSidebar = async (
   res: Response
 ): Promise<void> => {
   try {
-    const { id } = req.user!;
-
+    const { id } = req.user;
     const users = await prisma.user.findMany({
       where: {
         id: {
