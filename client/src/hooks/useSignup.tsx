@@ -21,7 +21,6 @@ const useSignup = () => {
       const res = await axios.post("/auth/signup", inputs);
 
       const data = res.data;
-      console.log("User SIGNUP: " + data);
 
       if (!res.status) throw new Error(data.error);
       setAuthUser(data);

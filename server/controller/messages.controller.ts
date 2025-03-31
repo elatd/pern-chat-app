@@ -45,7 +45,7 @@ export const sendMessage = async (req: Request, res: Response) => {
     // In Prisma, relationships are not automatically updated when you insert a related record.
     // The messages array in the Conversation model does not auto-update when a message is inserted.
     // Hence this step is needed.
-    if(newMessage){
+    if (newMessage) {
       conversation = await prisma.conversation.update({
         where: { id: conversation.id },
         // Find the conversation and attach this new message (newMessage.id) to its messages relation
@@ -59,11 +59,11 @@ export const sendMessage = async (req: Request, res: Response) => {
       });
     }
 
-    // @TODO: add websocket
+    // emit the new message to the receiver's socket
     const receiverSocketId = getSocketId(receiverId);
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", {
-        ...newMessage
+        ...newMessage,
       });
     }
 

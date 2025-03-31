@@ -13,7 +13,6 @@ const useLogout = () => {
       const res = await axios.post("/auth/logout");
 
       const data = res.data;
-      console.log("User Logout: " + data);
 
       if (!res.status) throw new Error(data.error);
 
