@@ -7,7 +7,7 @@ const Conversations = () => {
     return (
         <div className='py-2 flex flex-col gap-2 overflow-auto'>
             {isLoading ? "Loading..." : ""}
-            {conversations.map((conversation)=> (<Conversation conversation={conversation} />))}
+            {conversations.map((conversation)=> (<Conversation conversation={conversation} key={conversation.id}/>))}
         </div>
     )
 }
