@@ -44,7 +44,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       const res = await axios.get("/auth/me");
 
       const data = res.data;
-      console.log(data);
+
       setAuthUser(data);
     } catch (error: AxiosError | unknown) {
       if (isAxiosError(error)) {

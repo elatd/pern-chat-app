@@ -4,8 +4,10 @@ import { MessageCircle } from "lucide-react";
 import MessageInput from "@/components/messages/MessageInput.tsx";
 import { ReactElement } from "react";
 import Messages from "./Messages";
+import LogoutButton from "../Sidebar/LogoutButton";
 
 export const MessageContainer = (): ReactElement => {
+
   const { selectedConversation } = useConversation();
   return (
     <div className="w-full flex flex-col h-full ">
@@ -14,9 +16,17 @@ export const MessageContainer = (): ReactElement => {
       ) : (
         <>
           {/* Header */}
-          <div className="bg-accent px-4 py-2 mb-2 overflow-hidden border-collapse rounded-r-md rounded-b-[0px]">
-            <span className="label-text">To:</span>{" "}
-            <span className="text-foreground font-medium">John Doe</span>
+          <div className="bg-accent px-4 py-2 mb-2 flex items-center gap-4 overflow-hidden border-collapse rounded-r-md rounded-b-[0px] shadow-md">
+            <>
+              <div className='w-[32px] md:w-[36px] rounded-full'>
+                  <img src={selectedConversation.profilePic} alt={`${selectedConversation.fullName}'s profile picture`} className="rounded-full" />
+              </div>
+
+              <div className='flex flex-col flex-1'>
+                  <div className='font-bold text-sm md:text-base'>{selectedConversation.fullName}</div>
+              </div>
+            </>
+            <LogoutButton/>
           </div>
           <Messages />
           <MessageInput />

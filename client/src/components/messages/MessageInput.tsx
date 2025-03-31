@@ -5,11 +5,17 @@ import useSendMessage from "@/hooks/useSendMessage";
 function MessageInput():ReactElement {
     const {loading, sendMessage}= useSendMessage()
     const [message, setMessage] = useState<string>("")
-    const handleSubmit = (e:ChangeEvent<HTMLFormElement>):any => {
+
+    const handleSubmit = async (e:ChangeEvent<HTMLFormElement>)=> {
         e.preventDefault();
-        console.log("HIT send message",message)
-        sendMessage(message)
+        await sendMessage(message)
         setMessage("")
+
+        // Reset textarea height to default after sending message
+        const textarea = document.getElementById('message') as HTMLTextAreaElement;
+        if (textarea) {
+            textarea.style.height = "40px"; // Reset to minHeight value
+        }
     }
 
     return (
@@ -27,7 +33,13 @@ function MessageInput():ReactElement {
                         3. Caps height at 120px using Math.min
                 */}
                 <textarea
-                    className="text-sm w-full block p-2 bg-background border border-primary rounded-lg pr-20  resize-none"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            handleSubmit(e as any);
+                        }
+                    }}
+                    className="text-sm w-full block p-2 bg-background border border-primary rounded-lg pr-20  resize-none "
                     id="message"
                     placeholder="Type a message..."
                     value={message}
@@ -35,7 +47,7 @@ function MessageInput():ReactElement {
                     autoComplete="off"
                     rows={1} 
                     style={{
-                        minHeight: "40px", 
+                        minHeight: "35px", 
                         maxHeight: "120px", 
                         overflowY: "auto"
                     }}
@@ -47,7 +59,7 @@ function MessageInput():ReactElement {
                 />
                 <div className="absolute right-4 md:right-4 inset-y-0  flex gap-2" >
                     <button disabled={loading} className="text-sm inset-y-0 cursor-pointer "><Paperclip/> </button>
-                    <button type={"submit"} className={"text-sm cursor-pointer  "} disabled={loading}>{loading ? <span className='loading loading-spinner' /> : <Send className='w-6 h-6 text-primary' />}</button>
+                    <button type={"submit"} className={"text-sm cursor-pointer  "} disabled={loading}>  <Send className='w-6 h-6 text-primary' /> </button>
                 </div>
             </div>
         </form>

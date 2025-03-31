@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../db/prisma.js";
+import { getSocketId, io } from "../socket/index.js";
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {
@@ -44,19 +45,27 @@ export const sendMessage = async (req: Request, res: Response) => {
     // In Prisma, relationships are not automatically updated when you insert a related record.
     // The messages array in the Conversation model does not auto-update when a message is inserted.
     // Hence this step is needed.
-    const updatedConversation = await prisma.conversation.update({
-      where: { id: conversation.id },
-      // Find the conversation and attach this new message (newMessage.id) to its messages relation
-      data: {
-        messages: {
-          connect: {
-            id: newMessage.id,
+    if(newMessage){
+      conversation = await prisma.conversation.update({
+        where: { id: conversation.id },
+        // Find the conversation and attach this new message (newMessage.id) to its messages relation
+        data: {
+          messages: {
+            connect: {
+              id: newMessage.id,
+            },
           },
         },
-      },
-    });
+      });
+    }
 
     // @TODO: add websocket
+    const receiverSocketId = getSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", {
+        ...newMessage
+      });
+    }
 
     res.status(200).json({ message: newMessage });
   } catch (error) {

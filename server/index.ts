@@ -1,14 +1,13 @@
-import express, { json,Express, Request, Response } from "express";
-import authRoutes from "./routes/auth.route.js";
-import messageRoutes from "./routes/message.route.js";
-import dotenv from "dotenv";
+import { json, Request, Response } from "express";
+import { app, io, server } from "./socket/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
+import dotenv from "dotenv";
+import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
 
 dotenv.config();
 const PORT:string|3000  =  process.env.PORT || 3000;
-
-const app:Express = express();
 
 app.use(json()); // parsing application/json
 app.use(cookieParser());
@@ -30,7 +29,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! This is our chat application.");
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 

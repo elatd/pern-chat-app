@@ -11,7 +11,7 @@ const useGetConversations = () => {
         try {
             const res = await AxiosInstance.get('/message/conversations')
             const data = await res.data.users
-            console.log(res)
+
             setConversations(data)
             setIsLoading(false)
         } catch (error: AxiosError | unknown) {

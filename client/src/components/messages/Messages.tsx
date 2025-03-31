@@ -1,14 +1,17 @@
 import { useGetMessages } from "@/hooks/useGetMessages";
 import { Skeleton } from "../ui/skeleton";
 import Message from "./Message";
+import useListenMessages from "@/hooks/useListenMessages";
+import useChatScroll from "@/hooks/useChatScroll";
+import React from "react";
 
 function Messages() {
   const { loading, messages } = useGetMessages();
-  // useListenMessages();
+  useListenMessages();
+  const ref = useChatScroll(messages) as React.MutableRefObject<HTMLDivElement>;
 
-  // const ref = useChatScroll(messages) as React.MutableRefObject<HTMLDivElement>;
   return (
-    <div className="px-4 flex-1 overflow-auto">
+    <div className="px-4 flex-1 overflow-auto" ref={ref}>
       {loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
 
       {!loading && messages.map((message) => <Message key={message.id} message={message} />)}
