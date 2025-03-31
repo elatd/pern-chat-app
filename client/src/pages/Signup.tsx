@@ -21,7 +21,6 @@ const Signup = () => {
   const handleLogin = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     signup(form);
-    console.log(form);
   };
 
   return (

@@ -7,7 +7,7 @@ import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 
 dotenv.config();
-const PORT:string|3000  =  process.env.PORT || 3000;
+const PORT: string | 3000 = process.env.PORT || 3000;
 
 app.use(json()); // parsing application/json
 app.use(cookieParser());
