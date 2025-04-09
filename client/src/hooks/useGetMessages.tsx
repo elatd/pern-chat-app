@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { useToast } from "@/hooks/use-toast.ts";
 import useConversation from "@/zustand/useConversation.tsx";
 import AxiosInstance from "@/lib/axios";
 
 export const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation } = useConversation();
-  const { toast } = useToast();
 
   const getMessages = async () => {
     if (!selectedConversation) return;

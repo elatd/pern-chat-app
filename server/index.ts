@@ -5,6 +5,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
+import s3Routes from "./routes/s3.route.js";
 
 dotenv.config();
 const PORT: string | 3000 = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use("/api/s3", s3Routes);
 
 app.use("/api/auth", authRoutes);
 app.use("/api/message", messageRoutes);

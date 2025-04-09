@@ -4,7 +4,7 @@ import { getSocketId, io } from "../socket/index.js";
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {
-    const { message } = req.body;
+    const { message, fileUrl, fileName, fileType } = req.body;
     const { id: receiverId } = req.params;
     const userId = req.user?.id;
 
@@ -36,7 +36,10 @@ export const sendMessage = async (req: Request, res: Response) => {
 
     const newMessage = await prisma.message.create({
       data: {
-        body: message,
+        body: message || "",
+        fileUrl: fileUrl || null, // optional file URL
+        fileName: fileName || null,
+        fileType: fileType || null,
         senderId: userId,
         conversationId: conversation.id,
       },

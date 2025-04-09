@@ -48,7 +48,11 @@ model Message {
   senderId String
   sender   User   @relation(fields: [senderId], references: [id])
 
-  body      String
+  body     String?
+  fileUrl  String? // <- for file/document link
+  fileName String? // <- to show in UI
+  fileType String? // <- like application/pdf
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
