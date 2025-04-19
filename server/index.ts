@@ -25,17 +25,16 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
+app.use("/api/s3", s3Routes);
+
 if (process.env.NODE_ENV !== "development") {
   app.use(express.static(path.join(__dirname, "/client/dist")));
   app.get("*", (req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
   });
 }
-
-app.use("/api/s3", s3Routes);
-
-app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! This is our chat application.");
