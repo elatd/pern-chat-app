@@ -17,6 +17,7 @@ A full-stack real-time chat application built with TypeScript, Socket.IO, and Po
 - 📁 **Document & file sharing** with support for various file types
 - 🎥 **Video playback** directly in chat
 - 🔐 **Secure file access** via signed URLs
+- 🔔 **Notification sound** when away from tab
 - 💡 **User authentication** with sessions and cookies
 - 🧠 **Smart UI state management** with Zustand
 - 📱 **Fully responsive interface** for mobile and desktop
