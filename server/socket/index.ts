@@ -9,7 +9,10 @@ const server = createServer(app);
 // create socket server using http server
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:5173"],
+    origin: [
+      "http://localhost:5173",
+      "https://pern-chat-app-osj7.onrender.com/",
+    ],
     methods: ["GET", "POST"],
   },
 });

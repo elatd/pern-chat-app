@@ -17,14 +17,21 @@ app.use(json()); // parsing application/json
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5173"], // Allow only requests from this origin
+  origin: ["http://localhost:5173", "https://pern-chat-app-osj7.onrender.com/"], // Allow only requests from this origin
   methods: "GET,POST,PUT,DELETE,PATCH ", // Allow only these methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allow only these headers
   preflightContinue: false, // Ignore preflight requests
   credentials: true,
 };
-
 app.use(cors(corsOptions));
+
+if (process.env.NODE_ENV !== "development") {
+  app.use(express.static(path.join(__dirname, "/client/dist")));
+  app.get("*", (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  });
+}
+
 app.use("/api/s3", s3Routes);
 
 app.use("/api/auth", authRoutes);
@@ -33,13 +40,6 @@ app.use("/api/message", messageRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! This is our chat application.");
 });
-
-if (process.env.NODE_ENV !== "development") {
-  app.use(express.static(path.join(__dirname, "/client/dist")));
-  app.get("*", (req: Request, res: Response) => {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-  });
-}
 
 server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
