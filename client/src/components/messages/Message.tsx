@@ -60,7 +60,7 @@ function Message({ message }: MessagePropsType) {
                 <img
                   src={signedFileUrl}
                   alt={message.fileName || "shared image"}
-                  className="rounded-lg max-w-xs max-h-64 object-cover border border-white"
+                  className="rounded-lg max-w-[200px] md:max-w-xs max-h-64 object-cover border border-white"
                 />
               </div>
             )}
@@ -70,7 +70,7 @@ function Message({ message }: MessagePropsType) {
               <div className="mt-2">
                 <video
                   controls
-                  className="rounded-lg max-w-xs max-h-64 border border-white"
+                  className="rounded-lg max-w-[200px] md:max-w-xs  max-h-64 border border-white"
                 >
                   <source src={signedFileUrl} type={message.fileType} />
                   Your browser does not support the video tag.
