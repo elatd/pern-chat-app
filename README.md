@@ -132,7 +132,3 @@ npm run dev
 ![Homepage](./assets/Homescreen.png)
 ![Login](./assets/Login.png)
 ![Signup](./assets/Signup.png)
-
-```
-
-```

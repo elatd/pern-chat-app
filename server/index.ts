@@ -6,9 +6,12 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import s3Routes from "./routes/s3.route.js";
+import path from "path";
+import express from "express";
 
 dotenv.config();
 const PORT: string | 3000 = process.env.PORT || 3000;
+const __dirname = path.resolve();
 
 app.use(json()); // parsing application/json
 app.use(cookieParser());
@@ -30,6 +33,13 @@ app.use("/api/message", messageRoutes);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World! This is our chat application.");
 });
+
+if (process.env.NODE_ENV !== "development") {
+  app.use(express.static(path.join(__dirname, "/client/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  });
+}
 
 server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
