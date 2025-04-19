@@ -4,7 +4,7 @@ import { getSocketId, io } from "../socket/index.js";
 
 export const sendMessage = async (req: Request, res: Response) => {
   try {
-    const { message, fileUrl, fileName, fileType } = req.body;
+    const { message, fileUrl, fileName, fileType, fileKey } = req.body;
     const { id: receiverId } = req.params;
     const userId = req.user?.id;
 
@@ -40,6 +40,7 @@ export const sendMessage = async (req: Request, res: Response) => {
         fileUrl: fileUrl || null, // optional file URL
         fileName: fileName || null,
         fileType: fileType || null,
+        fileKey: fileKey || null, // ✅ store fileKey
         senderId: userId,
         conversationId: conversation.id,
       },
@@ -64,10 +65,14 @@ export const sendMessage = async (req: Request, res: Response) => {
 
     // emit the new message to the receiver's socket
     const receiverSocketId = getSocketId(receiverId);
+    const senderSocketId = getSocketId(userId);
+
     if (receiverSocketId) {
-      io.to(receiverSocketId).emit("newMessage", {
-        ...newMessage,
-      });
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
+    // Emit to sender as well to update the UI
+    if (senderSocketId) {
+      io.to(senderSocketId).emit("newMessage", newMessage);
     }
 
     res.status(200).json({ message: newMessage });

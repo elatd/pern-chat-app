@@ -14,7 +14,7 @@ app.use(json()); // parsing application/json
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow only requests from this origin
+  origin: ["http://localhost:5173"], // Allow only requests from this origin
   methods: "GET,POST,PUT,DELETE,PATCH ", // Allow only these methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allow only these headers
   preflightContinue: false, // Ignore preflight requests
@@ -35,5 +35,4 @@ server.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-// @TODO :Add web socket.io
 // @TODO : Setup server for deployment

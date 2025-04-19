@@ -19,7 +19,7 @@ function App() {
         className="absolute -z-10 inset-0 h-full w-full 
       bg-[radial-gradient(circle,#73737350_1px,transparent_1px)] 
       bg-[size:10px_10px]"
-      ></div>
+      />
       <Routes>
         <Route
           path="/"

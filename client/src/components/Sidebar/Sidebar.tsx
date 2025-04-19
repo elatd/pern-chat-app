@@ -3,7 +3,7 @@ import SearchInput from "./SearchInput";
 
 function Sidebar() {
   return (
-    <div className={"h-full flex flex-col gap-2 p-4 border-r-2"}>
+    <div className={"h-full flex flex-col gap-2 my-2 md:my-0 md:p-4 "}>
       <SearchInput />
       <Conversations />
     </div>

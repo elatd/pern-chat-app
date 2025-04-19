@@ -13,7 +13,7 @@ export const MessageContainer = (): ReactElement => {
   const isOnline = onlineUsers.includes(selectedConversation?.id as string);
 
   return (
-    <div className="w-full flex flex-col h-full ">
+    <div className="w-full flex flex-col h-full relative">
       {!selectedConversation ? (
         <NoChatSelected />
       ) : (

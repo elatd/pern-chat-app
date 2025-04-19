@@ -13,9 +13,8 @@ const Home = () => {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full flex h-[80vh] md:max-w-screen-md md:h-[550px] rounded-lg overflow-hidden bg-primary-foreground bg-clip-padding border-primary-background shadow-accent-background shadow-xl border-2 backdrop-filter backdrop-blur-lg bg-opacity-0"
+        className="w-full flex h-[80vh] md:max-w-screen-lg md:h-[550px] rounded-lg overflow-hidden bg-primary-foreground bg-clip-padding border-primary-background shadow-accent-background shadow-xl border-2 backdrop-filter backdrop-blur-lg bg-opacity-0"
       >
-        {/* Backdrop overlay */}
         {showSidebar && (
           <div
             className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 md:hidden"
@@ -23,16 +22,16 @@ const Home = () => {
           />
         )}
 
-        {/* Sidebar modal */}
         <div
           className={`
           ${showSidebar ? "fixed" : "hidden"} 
           md:relative md:block 
-          z-50 bg-primary-foreground h-[100vh]
-          left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+          z-50 bg-primary-foreground h-full
+          left-0 top-1/2  -translate-y-1/2  p-2 md:p-0
           md:left-0 md:top-0 md:translate-x-0 md:translate-y-0
-          rounded-lg md:rounded-none
+          rounded-none
           w-[80%] max-w-[300px] md:w-auto
+          border-r-2
         `}
         >
           <Sidebar />
@@ -41,7 +40,7 @@ const Home = () => {
       </motion.div>
 
       <button
-        className="fixed top-2 left-2 md:top-4 md:left-4 p-2 bg-accent/60 rounded-full shadow-lg md:hidden transition duration-900 ease-in-out hover:bg-muted hover:shadow-md border border--primary-foreground hover:border hover:border-primary-background"
+        className="fixed top-2 left-2 md:top-4 md:left-4 p-2 bg-accent/60 rounded-full shadow-lg md:hidden transition duration-900 ease-in-out hover:bg-muted hover:shadow-md border border--primary-foreground hover:border hover:border-primary-background hover:cursor-pointer"
         onClick={() => setShowSidebar(!showSidebar)}
       >
         {showSidebar ? (

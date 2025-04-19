@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.tsx";
-import {Toaster} from "@/components/ui/toaster.tsx";
+import { Toaster } from "@/components/ui/toaster.tsx";
 import SocketContextProvider from "./context/SocketContextProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")!).render(
       <AuthContextProvider>
         <SocketContextProvider>
           <App />
-          <Toaster/>
+          <Toaster />
         </SocketContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

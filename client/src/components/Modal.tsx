@@ -9,8 +9,8 @@ const Modal = ({
 }) => {
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-      onClick={onClose} // Close modal on backdrop click
+      className="absolute inset-0 flex items-center justify-center w-full bg-black bg-opacity-70"
+      onClick={onClose}
     >
       <div
         className="z-10"

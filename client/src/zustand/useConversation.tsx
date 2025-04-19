@@ -2,11 +2,12 @@ import { create } from "zustand";
 
 export type MessageType = {
   id: string;
-  body: string;
+  senderId: string;
+  body?: string;
   fileUrl?: string;
   fileName?: string;
   fileType?: string;
-  senderId: string;
+  fileKey?: string; // ✅ used for signed GETs
   createdAt: string;
 };
 

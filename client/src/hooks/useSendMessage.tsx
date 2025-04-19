@@ -8,6 +8,7 @@ export interface SendMessageProps {
   uploadedFileUrl?: string;
   uploadedFileName?: string;
   uploadedFileType?: string;
+  fileKey?: string; // used for signed GETs
 }
 
 const useSendMessage = () => {
@@ -19,6 +20,7 @@ const useSendMessage = () => {
     uploadedFileUrl,
     uploadedFileName,
     uploadedFileType,
+    fileKey,
   }: SendMessageProps) => {
     if (!selectedConversation) return;
     setLoading(true);
@@ -30,6 +32,7 @@ const useSendMessage = () => {
           fileUrl: uploadedFileUrl || null,
           fileName: uploadedFileName || null,
           fileType: uploadedFileType || null,
+          fileKey: fileKey || null,
         }
       );
       if (!res.status) throw new Error(res.data.error || "An error occurred");
