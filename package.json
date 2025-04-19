@@ -5,7 +5,7 @@
   "main": "./server/dist/index.js",
   "scripts": {
     "dev": "concurrently \"npx tsc --watch\" \"nodemon ./server/dist/index.js\"",
-    "build": "tsc",
+    "build": "tsc && npm i && prisma generate --schema=./server/prisma/schema.prisma && npm i --prefix client && npm run build --prefix client",
     "start": "node ./server/dist/index.js"
   },
   "type": "module",
