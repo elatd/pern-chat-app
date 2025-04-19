@@ -127,6 +127,10 @@ npm run dev
 - [ ] Should integrate AI??
 - [ ] Use Lambda to generate thumbnails or PDFs
 
+## AWS S3 bucket workflow
+
+![S3_upload_flow](./assets/S3_upload_flow.png)
+
 ## Glimpses:
 
 ![Homepage](./assets/Homescreen.png)

@@ -30,8 +30,10 @@ const useSignup = () => {
         console.log("Error in signup hook", error?.response?.data);
       else console.log("Error in signup hook", error);
       toast({
-        title: error as string,
-        description: error as string,
+        title: "Faied to login",
+        description: isAxiosError(error)
+          ? error.response?.data?.error || "Something went wrong"
+          : (error as Error).message || "Unexpected error",
       });
     } finally {
       setLoading(false);

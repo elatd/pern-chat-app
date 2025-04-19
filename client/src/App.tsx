@@ -5,9 +5,12 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import { useAuthContext } from "./context/AuthContext";
 import { Skeleton } from "./components/ui/skeleton";
+import { useNotificationSetup } from "./hooks/useNotificationSetup";
 
 function App() {
   const { authUser, isLoading } = useAuthContext();
+  // ask for notification permission
+  useNotificationSetup();
 
   if (isLoading) {
     return <Skeleton className="w-[100px] h-[20px] rounded-full" />;
